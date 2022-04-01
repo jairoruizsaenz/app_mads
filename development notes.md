@@ -2,58 +2,123 @@
 
 A continuación se presentan notas generales utilizadas para el desarrollo de aplicaciones utilizando el framework Django.
 
-### Intalación
-```console
-pip install django
+1. Crear un ambiente virtual para aislar la instalación de dependencias
+```
+python virtualenv env
 ```
 
-### 2. Actualizar los documentos
-
-* Active el branch gh-pages
-* Borre la carpeta versiones
-* Modifique el archivo **sphinx/source/conf.py** en caso de ser necesario (si se crea un nuevo release)
-* Desde la carpeta base corra el comando 
-    ```console
-    sphinx-multiversion ./sphinx/source .
+2. Activar ambiente virtual
+- Windows
     ```
-* Haga commit y push en el branch gh-pages con los nuevos archivos
+    env\Scripts\activate
+    ```
 
-### 3. Solución a posibles errores
+- Linux
+    ```
+    source env/bin/activate
+    ```
 
-#### - El tema sphinx_rtd_theme no tiene la pestaña de versiones
+3. Instalar dependencias y exportar archivo requirements.txt
+- Se puede mandetener manualmente para tener mejor control
+```
+python -m pip install Django
+pip freeze > requirements.txt
+```
 
-* Debe asegurarse que el archivo de configuración **sphinx/source/conf.py** tenga definida la ruta de templates ***templates_path = ['_templates']***
+4. Crear el proyecto
+```
+django-admin startproject django_project
+```
 
-* Incluir la plantilla de versiones ***sphinx/source/_templates/versions.html***
+5. Crear la aplicación
+```
+python manage.py startapp aplicacion
+```
 
-* Para mayor detalle puede consultar el enlace: [**ReadTheDocs Theme**](https://holzhaus.github.io/sphinx-multiversion/master/templates.html#readthedocs-theme). Vale la pena mencionar que se utiliza una plantilla similar a la presentada en el enlace anterior. Sin embargo, se modificó para poder cambiar el nombre del branch master
+6. Incluir la nueva app en archivo settings.py del proyecto
+```
+apregar aplicacion.apps.AplicacionConfig' en INSTALLED_APPS 
+```
+```
+LANGUAGE_CODE = 'es-co'
+TIME_ZONE = 'America/Bogota'
+ALLOWED_HOSTS = ['*']
+modificar configuración de base de datos (si se requiere) en archivo settings.py del proyecto
+```
 
-#### - Al actualizar la documentación no se genera la documentación de un release o branch
+7. Ejecutar migración inicial de base de datos
+```
+python manage.py migrate
+```
 
-* Debe verificar la configuración del archivo **sphinx/source/conf.py**
-    Las variables ***smv_tag_whitelist*** y ***smv_branch_whitelist*** contienen expresiones regulares que permiten ignorar tags o ramas en particular
-	* Para mayor información puede consultar el enlace [**Configuración sphinx-multiversion**](https://holzhaus.github.io/sphinx-multiversion/master/configuration.html)
+8. Crear un usuario de administración (por ejemplo user: admin, password: admin)
+```
+python manage.py createsuperuser
+```
 
-* Otra posible causa de este error es que no estén sincronizados los tags remotos con los tags locales. Puede utilizar los siguientes comando:
-	* Permite consultar los tags locales
-	```console
-	git tag
-	```
+9. crear modelo
+10. crear archivo urls.py de la aplicación
+11. ajustar archivo views.py de la aplicación
+12. ajustar archivo urls.py del proyecto > incluir archivo urls.py de la aplicación
+13. ajustar archivo urls.py de la aplicación > redirección a views.py y funciones de la app, no ovlidar incluir app_name = 'nombre'
 
-	* Permite consultar los tags remotos
-	```console
-	git ls-remote --tags
-	```
+14. crear carpeta templates >> aplicacion/templates/aplicacion
+15. crear archivos HTML correspondientes a las views.py 
 
-	* Permite sincronizar los tags remotos/locales
-	```console
-	git fetch --prune
-	```
-         
-#### - Los nombres de las versiones están mal
-    
-* En el tema *ReadTheDocs* hay dos partes donde se puede ver la versión que se está consultando.
-    
-    1. En la esquina superior izquierda debajo del logo. Este valor se toma de la variable ***version*** del archivo ***sphinx/source/conf.py***. Para modificar el valor de una versión en particular se debe modificar esta variable en la rama o release respectivo.
+16. Iterar
+  - ajustar urls.py, views.py, .html
+  - models.py (actualizar bases de datos después de modificar los atributos/variables)
+    - python manage.py makemigrations
+    - python manage.py migrate
 
-    2. En la esquina inferior izquierda en la sección de versiones. Los nombres de las versiones se toman del **nombre de las ramas o tags**, a excepción de la rama master. El nombre de la rama master se está modificando en el template sphinx/source/_templates/versions.html
+17. Customize the admin form
+como mínimo incluir:
+```
+from django.contrib import admin
+from .models import Choice, Question
+
+admin.site.register(Question, QuestionAdmin)
+admin.site.register(Choice)
+```
+
+18. static files
+crea carpetas dentro de la app "static/aplicacion"
+```
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'aplicacion/css/style.css' %}">
+```
+19. variables de apoyo, se puede usar el archivo de settings.py para almacenar información en variables 
+```
+from django.conf import settings
+variable_temp = 'hola'
+settings.variable_temp
+```
+
+20. Template general
+crear carpeta templates al mismo nivel de la carpeta del proyecto
+modificar variable Templates en archivo settings.py 
+```
+'DIRS': [os.path.join(BASE_DIR, 'templates')],
+```
+```
+{% extends 'archivo_base.html' %}
+{% block content %}
+{% endblock %}
+```
+21. static files generales, se pueden tener archivos estaticos a nivel del proyecto
+
+hacer ajustes en archivo settings.py
+```
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATIC_URL = '/static/'
+```
+```
+{% load static %}
+<img src="{% static 'image/logo.gif' %}" alt="Smiley face" height="60" width="200">
+```
+
+22. Ejecutar servidor de desarrollo de Django
+```
+python manage.py runserver <ip>:<port>
+python manage.py runserver 0:8000
+```
