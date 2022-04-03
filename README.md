@@ -2,7 +2,7 @@
 
 <!-- ![screenshot](https://raw.githubusercontent.com/ucd-dnp/contexto/master/recursos/contexto.jpg "ConTexto") -->
 
-![screenshot](front.png "Herramienta de evaluación de solicitudes de sustracciones")
+![screenshot](https://raw.githubusercontent.com/jairoruizsaenz/app_mads/main/MADS/static/images/front.png "Herramienta de evaluación de solicitudes de sustracciones")
 
 ## Descripción
 
