@@ -1,1 +1,18 @@
-<h1>Home - Página principal</h1>
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block referencia %}home.html{% endblock %}
+{% block title_1 %}{% block title_2 %}{% endblock %}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <img class="img-fluid" src="{% static 'images/front.png' %}">
+        <br><br>
+        <p>
+            El propósito de esta herramienta consiste en estandarizar y facilitar la evaluación de las solicitudes de sustracciones de áreas de reserva forestal de orden nacional que llegan a la dirección de Bosques, Biodiversidad y Servicios Ecosistémicos del Ministerio de Ambiente y Desarrollo Sostenible.
+        </p>
+        <a class="btn btn-success" href="{% url 'baseApp:inicio' %}">Ingresar</a>
+    </div>
+</div>  
+{% endblock %}

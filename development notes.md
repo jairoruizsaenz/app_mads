@@ -64,13 +64,49 @@ A continuación se presentan notas generales utilizadas para el desarrollo de ap
     ```
 
 0. crear modelo
-0. crear archivo urls.py de la aplicación
+
+0. crear archivo urls.py de la aplicación y ajustar archivo urls.py del proyecto
+
+    ulrs del proyecto
+    ```
+    from django.contrib import admin
+    from django.urls import path, include
+    from django.views.generic.base import TemplateView
+
+    urlpatterns = [
+        path('home/', TemplateView.as_view(template_name='home.html'), name='home'),
+        path('admin/', admin.site.urls, name='django-admin'),
+        path('', include('base.urls')),
+        # path('usuarios/', include('usuarios.urls')), 
+    ]
+    ```
+
+    urls de la aplicación
+    ```
+    from django.urls import path
+    from .views import *
+    # from django.views.generic import TemplateView
+
+    # https://cosasdedevs.com/posts/como-crear-urls-amigables-con-slug-en-django/
+
+    app_name = 'baseApp'
+    urlpatterns = [
+        path('inicio/', home, name='inicio'),
+    ]
+    ```
+
 0. ajustar archivo views.py de la aplicación
-0. ajustar archivo urls.py del proyecto > incluir archivo urls.py de la aplicación
-0. ajustar archivo urls.py de la aplicación > redirección a views.py y funciones de la app, no ovlidar incluir app_name = 'nombre'
+    ```
+    from django.shortcuts import render, redirect, get_object_or_404
+
+    def home(request):
+        context = { 'mensaje': 'Este es un mensaje de prueba' }    
+        return render(request, 'base/inicio.html', context)
+    ```
 
 0. crear carpeta templates >> aplicacion/templates/aplicacion
-0. crear archivos HTML correspondientes a las views.py 
+
+0. crear archivos HTML correspondientes a las views.py
 
 0. Iterar
     - ajustar urls.py, views.py, .html
@@ -93,11 +129,12 @@ A continuación se presentan notas generales utilizadas para el desarrollo de ap
     ```
 
 0. static files
-crea carpetas dentro de la app "static/aplicacion"
+    crea carpetas dentro de la app "static/aplicacion"
     ```
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'aplicacion/css/style.css' %}">
     ```
+
 0. variables de apoyo, se puede usar el archivo de settings.py para almacenar información en variables 
     ```
     from django.conf import settings
@@ -106,8 +143,8 @@ crea carpetas dentro de la app "static/aplicacion"
     ```
 
 0. Template general
-crear carpeta templates al mismo nivel de la carpeta del proyecto
-modificar variable Templates en archivo settings.py 
+    crear carpeta templates al mismo nivel de la carpeta del proyecto
+    modificar variable Templates en archivo settings.py 
     ```
     'DIRS': [os.path.join(BASE_DIR, 'templates')],
     ```
@@ -116,8 +153,8 @@ modificar variable Templates en archivo settings.py
     {% block content %}
     {% endblock %}
     ```
-0. static files generales, se pueden tener archivos estaticos a nivel del proyecto
 
+0. static files generales, se pueden tener archivos estaticos a nivel del proyecto
     hacer ajustes en archivo settings.py
     ```
     STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]

@@ -1,0 +1,23 @@
+:root {
+    --azul: #3366cc;
+}
+
+body {    
+    background-color: #f7f7f7 !important;
+    font-family: "Nunito", sans-serif;
+    padding-top: 70px;
+}
+
+.my-contanier { 
+    min-height: 820px !important;
+}
+
+.navbar {
+    /* background-color: var(--azul); */
+    background-color: rgb(0,72,128) !important;
+}
+
+.btn {
+    border: none;
+    background-color: rgb(0,72,128) !important;
+}
