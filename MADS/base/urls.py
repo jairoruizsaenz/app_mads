@@ -6,5 +6,6 @@ from .views import *
 
 app_name = 'baseApp'
 urlpatterns = [
-    path('inicio/', home, name='inicio'),
+    path('solicitudes/', Home, name='solicitudes'),
+    path('crear-solicitud/', CreateMapa, name='crear_solicitud'),
 ]

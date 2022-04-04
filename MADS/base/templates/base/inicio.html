@@ -1,2 +1,16 @@
-<h1>Página de inicio</h1>
-{{ mensaje }}
+<!-- templates/inicio.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block referencia %}base/inicio.html{% endblock %}
+{% block title_1 %}{% block title_2 %}Solicitudes{% endblock %}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <p>
+            A continuación se presenta el listado de solicitudes registradas en la herramienta.
+        </p>
+        <a class="btn btn-success" href="{% url 'baseApp:crear_solicitud' %}">Nueva solicitud</a>
+    </div>
+</div>  
+{% endblock %}
