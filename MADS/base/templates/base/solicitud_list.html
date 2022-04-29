@@ -1,0 +1,38 @@
+<!-- templates/inicio.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block referencia %}base/inicio.html{% endblock %}
+{% block title_1 %}{% block title_2 %}Solicitudes{% endblock %}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <p>
+                A continuación se presenta el listado de solicitudes registradas en la herramienta.
+            </p>
+            <a class="btn btn-primary" href="{% url 'baseApp:crear_solicitud' %}">Nueva solicitud</a>
+        </div>
+    </div>    
+	<hr>
+	<div class="row row-cols-12 row-cols-md-12 g-12">
+		{% for solicitud in solicitudes %}
+			<div class="col">
+				{% comment %} <a href="{% url 'baseApp:detalles-solicitud' solicitud.pk %}" class="card h-100"> {% endcomment %}
+				<a href="" class="card h-100">
+					<div class="card-header text-white bg-primary">{{ solicitud.titulo }}</div>
+					<div class="card-body">
+						<!-- <h5 class="card-title">Card title</h5> -->
+						<p class="card-text texto-justificado">{{ solicitud.descripcion }}</p>
+					</div>					
+					<div class="card-footer bg-transparent">
+						<div class="row">						
+							<div class="col-md-9">
+								<small class="text-muted">Fecha de creación: {{ solicitud.created_at }}</small>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}
