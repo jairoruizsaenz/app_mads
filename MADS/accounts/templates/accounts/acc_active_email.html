@@ -1,0 +1,11 @@
+{% load i18n %}
+{% autoescape off %}
+
+Hola {{ user.first_name }},
+Haz click en el siguiente enlace para confirmar tu registro y activar tu cuenta.
+
+http://{{ domain }}{% url 'accounts_app:activate_user_account' uidb64=uid token=token %}
+
+{% trans "Thanks for using our site!" %}
+
+{% endautoescape %}

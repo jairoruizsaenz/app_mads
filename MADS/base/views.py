@@ -13,7 +13,7 @@ def CreateMapa(request):
     form = SolicitudCreateForm(request.POST or None)
     if form.is_valid():
         solicitud_nueva = form.save()
-        return redirect('baseApp:lista_solicitud')
+        return redirect('baseApp:solicitudes')
 
     context = {'form':form}
     return render(request, 'base/solicitud_create.html', context)

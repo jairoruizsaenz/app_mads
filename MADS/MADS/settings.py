@@ -30,14 +30,15 @@ ALLOWED_HOSTS=["localhost", "127.0.0.1"]
 # Application definition
 
 INSTALLED_APPS = [
+    'base.apps.BaseConfig',
+    'accounts.apps.AccountsConfig',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
-    'base.apps.BaseConfig',
 ]
 
 MIDDLEWARE = [
@@ -111,4 +112,30 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
+# MEDIA_ROOT = os.path.join(BASE_DIR, "media")  # where django should save the files
+# MEDIA_URL = '/media/'  # at what address you want to find the media files
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
+
+# Used for debug, it saves the emails as files in the "sent_files" folder
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+
+'''
+# Gmail SMTP server
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+#EMAIL_USE_SSL = True
+#EMAIL_PORT = 465
+EMAIL_HOST_USER = 'your_account@gmail.com'
+EMAIL_HOST_PASSWORD = 'your_accounts password'
+'''

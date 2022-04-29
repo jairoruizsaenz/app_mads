@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %} Crear cuenta {% endblock %}
+
+{% block navbar %}
+
+	<!-- if user is authenticated -->
+	<!--
+	<li class="nav-item"><a class="nav-link" href="{% url 'persuasivo_app:index' %}">Carga de archivo</a>
+	<li class="nav-item"><a class="nav-link" href="{% url 'persuasivo_app:index' %}">Acerca del proyecto</a>
+	-->
+
+{% endblock %}
+
+{% block content %}
+	<h4 style="text-align: center;">Creación de cuenta (sin autenticación por email)</h4><br>
+	{% if user.is_authenticated %}
+		Debe cerrar la sesión actual para poder crear una nueva cuenta
+	{% else %}
+		<div class = "row">
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4">
+				<form class="site-form" action="{% url 'accounts_app:signup2' %}" method="post" autocomplete="off" style="padding-left: 0%; padding-right: 0%">
+					{% csrf_token %}
+					
+					{% if form.errors %}
+						<div style="color:red">
+							{% for key,value in form.errors.items %} 
+								{{ value }}
+							{% endfor %}
+						</div>
+					{% endif %}
+					
+					<table style = "width: 100%; text-align: center;">
+						<tr><td> {{ form.username }} </td></tr>
+						<tr><td> {{ form.email }} </td></tr>
+						<tr><td> {{ form.first_name }} </td></tr>
+						<tr><td> {{ form.last_name }} </td></tr>
+						<tr><td> {{ form.password1 }} </td></tr>
+						<tr><td> {{ form.password2 }} </td></tr>
+						<tr><td> <br> </td></tr>
+						<tr style="text-align: left"><td> {{ form.password1.help_text }} </td></tr>
+						<tr>
+							<td><button class="btn btn-primary" type="submit">Crear cuenta</button></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+			<div class="col-sm-4"></div>
+		</div>
+	{% endif %}
+{% endblock %}
