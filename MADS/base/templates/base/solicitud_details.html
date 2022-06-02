@@ -1,0 +1,37 @@
+<!-- templates/base/solicitud_details.html -->
+{% extends 'base.html' %}
+{% block referencia %}templates/base/solicitud_details.html{% endblock %}
+{% block title_1 %}{% block title_2 %}Detalles solicitud{% endblock %}{% endblock %}
+
+{% block content %}    
+    <p><a class="boton" title="Editar" href="{% url 'baseApp:solicitudes' %}"><i class="fas fa-chevron-left verde"></i> Regresar</a></p>
+    <hr>
+
+    <div class="row">
+        <div class="col-md-8">
+            <p><strong>Expediente ID:</strong> <br> {{ solicitud.expediente_unico }}</p>
+            <p><strong>Título:</strong> <br> {{ solicitud.titulo }}</p>
+            <p><strong>Año:</strong> <br> {{ solicitud.anho }}</p>
+            <p><strong>Descripción:</strong> <br> {{ solicitud.descripcion }}</p>
+            <p><strong>Expediente:</strong> <br> {{ solicitud.expediente }}</p>
+            <p><strong>Estado:</strong> <br> {{ solicitud.estado }}</p>
+            <p><strong>Etapa:</strong> <br> {{ solicitud.etapa }}</p>
+            <p><strong>Actuación:</strong> <br> {{ solicitud.actuacion }}</p>
+            <p><strong>Sector:</strong> <br> {{ solicitud.sector }}</p>
+            <p><strong>Número de radicado:</strong> <br> {{ solicitud.num_radicado }}</p>
+            <p><strong>Fecha de radicado:</strong> <br> {{ solicitud.fecha_radicado }}</p>
+        </div>
+        <div class="col-md-4">
+            <p><strong>Nombre del proyecto:</strong> <br> {{ solicitud.nombre_proyecto }}</p>
+            <p><strong>Solicitante:</strong> <br> {{ solicitud.solicitante }}</p>
+            <p><strong>Tipo de sustraccion:</strong> <br> {{ solicitud.tipo_sustraccion }}</p>
+            <p><strong>Hectareas solicitadas:</strong> <br> {{ solicitud.hectareas_solicitadas }}</p>
+            <p><strong>Normatividad:</strong> <br> {{ solicitud.normatividad }}</p>
+            <p><strong>Reserva forestal:</strong> <br> {{ solicitud.reserva_forestal }}</p>
+            <p><strong>Departamento:</strong> <br> {{ solicitud.departamento }}</p>
+            <p><strong>Municipio:</strong> <br> {{ solicitud.municipio }}</p>
+            <p><strong>Fecha de registro:</strong> <br> {{ solicitud.created_at }}</p>
+            <p><a class="btn btn-primary btn-sm" title="Descargar Ficha" href="{% url 'baseApp:generate_PDF_document' solicitud.pk %}">Descargar Ficha <i class="fas fa-download"></i></a></p>
+        </div>
+    </div>
+{% endblock %}

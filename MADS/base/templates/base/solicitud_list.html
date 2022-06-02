@@ -1,7 +1,7 @@
-<!-- templates/inicio.html -->
+<!-- templates/base/solicitud_list.html -->
 {% extends 'base.html' %}
 {% load static %}
-{% block referencia %}base/inicio.html{% endblock %}
+{% block referencia %}templates/base/solicitud_list.html{% endblock %}
 {% block title_1 %}{% block title_2 %}Solicitudes{% endblock %}{% endblock %}
 
 {% block content %}
@@ -18,8 +18,8 @@
 	{% for solicitud in solicitudes %}
 		<div class="row">
 			<div class="col">
-				{% comment %} <a href="{% url 'baseApp:detalles-solicitud' solicitud.pk %}" class="card h-100"> {% endcomment %}
-				<a href="" class="card h-100">
+				<a href="{% url 'baseApp:detalles_solicitud' solicitud.pk %}" class="card h-100">
+				{% comment %} <a href="" class="card h-100"> {% endcomment %}
 					<div class="card-header text-white bg-primary">{{ solicitud.titulo }}</div>
 					<div class="card-body">
 						<!-- <h5 class="card-title">Card title</h5> -->

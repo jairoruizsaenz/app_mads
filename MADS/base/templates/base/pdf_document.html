@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ficha técnica de solicitud de sustracción</title>        
+    <style type="text/css">
+        body {
+            font-weight: 200;
+            font-size: 14px;
+        }
+        #title {
+            font-weight: 700;
+            font-size: 1.5 rem;
+            border-bottom: 2px solid #004980;
+        }
+        @page {
+            size: letter portrait;
+            /* @frame header_frame {
+                -pdf-frame-content: header_content;
+                left: 50pt; width: 512pt; 
+                top: 50pt; height: 40pt;
+                -pdf-frame-border: 1;
+            } */
+            @frame content_frame {
+                left: 50pt; width: 512pt; 
+                top: 50pt; height: 700pt;
+                /* -pdf-frame-border: 1; */
+            }
+            @frame footer_frame {
+                -pdf-frame-content: footer_content;
+                left: 50pt; width: 512pt; 
+                top: 772pt; height: 20pt;
+                /* -pdf-frame-border: 1; */
+            }
+        }
+
+        p {
+            text-align: justify;
+        }
+
+        #footer_content {
+            font-size: 12px;
+        }
+
+    </style>
+</head>
+
+    <body>
+        <!-- Content for Static Frame 'header_frame' -->
+        <!-- <div id="header_content">Lyrics-R-Us</div> -->
+
+        <div  id='title'>
+            <span>Ficha técnica de solicitud de sustracción</span>
+        </div>
+
+        <!-- Content for Static Frame 'footer_frame' -->
+        <div id="footer_content">
+            <table>
+                <tr> <th></th><th></th> </tr>
+                <tr>
+                    <td width="60%">
+                        Ficha técnica de solicitud de sustracción - {{ current_time }}
+                    </td>
+                    <td width="40%" style="text-align: right;">
+                        página <pdf:pagenumber> de <pdf:pagecount>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- HTML Content -->
+        <p><strong>Expediente ID:</strong> <br> {{ current_time }}</p>
+        <p><strong>Expediente ID:</strong> <br> {{ solicitud.expediente_unico }}</p>
+        <p><strong>Título:</strong> <br> {{ solicitud.titulo }}</p>
+        <p><strong>Año:</strong> <br> {{ solicitud.anho }}</p>
+        <p><strong>Descripción:</strong> <br> {{ solicitud.descripcion }}</p>
+        <p><strong>Expediente:</strong> <br> {{ solicitud.expediente }}</p>
+        <p><strong>Estado:</strong> <br> {{ solicitud.estado }}</p>
+        <p><strong>Etapa:</strong> <br> {{ solicitud.etapa }}</p>
+        <p><strong>Actuación:</strong> <br> {{ solicitud.actuacion }}</p>
+        <p><strong>Sector:</strong> <br> {{ solicitud.sector }}</p>
+        <p><strong>Número de radicado:</strong> <br> {{ solicitud.num_radicado }}</p>
+        <p><strong>Fecha de radicado:</strong> <br> {{ solicitud.fecha_radicado }}</p>
+        <p><strong>Nombre del proyecto:</strong> <br> {{ solicitud.nombre_proyecto }}</p>
+        <p><strong>Solicitante:</strong> <br> {{ solicitud.solicitante }}</p>
+        <p><strong>Tipo de sustraccion:</strong> <br> {{ solicitud.tipo_sustraccion }}</p>
+        <p><strong>Hectareas solicitadas:</strong> <br> {{ solicitud.hectareas_solicitadas }}</p>
+        <p><strong>Normatividad:</strong> <br> {{ solicitud.normatividad }}</p>
+        <p><strong>Reserva forestal:</strong> <br> {{ solicitud.reserva_forestal }}</p>
+        <p><strong>Departamento:</strong> <br> {{ solicitud.departamento }}</p>
+        <p><strong>Municipio:</strong> <br> {{ solicitud.municipio }}</p>
+        <p><strong>Fecha de registro:</strong> <br> {{ solicitud.created_at }}</p>
+
+    </body>
+</html>
