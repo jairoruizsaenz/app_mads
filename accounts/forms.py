@@ -8,11 +8,11 @@ from .models import CustomUser
 class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = CustomUser
-        fields = ('username', 'email', 'first_name', 'last_name')
+        fields = ('email', 'first_name', 'last_name')
+        # fields = '__all__'
 
     def __init__(self, *args, **kwargs):
         super(CustomUserCreationForm, self).__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Nombre de usuario'})
         self.fields['email'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Email'})
         self.fields['first_name'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Nombre'})
         self.fields['last_name'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Apellido'})
@@ -23,4 +23,4 @@ class CustomUserCreationForm(UserCreationForm):
 class CustomUserChangeForm(UserChangeForm):
     class Meta(UserChangeForm.Meta):
         model = CustomUser
-        fields = ('username', 'email', 'first_name', 'last_name')
+        fields = ('email', 'first_name', 'last_name')

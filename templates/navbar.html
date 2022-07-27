@@ -17,7 +17,7 @@
             <ul class="navbar-nav ms-auto">                
                 {% if request.user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="#"> Hola {{ request.user.first_name|title }} ({{ request.user.username }})</a>
+                        <a class="nav-link" href="#"> Hola {{ request.user.first_name|title }} ({{ request.user.email }})</a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a></li>

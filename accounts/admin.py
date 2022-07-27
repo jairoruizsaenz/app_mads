@@ -11,6 +11,8 @@ from .models import CustomUser
 
 
 class CustomUserAdmin(UserAdmin):
+    ordering = ('email',)
+    search_fields = ('email', 'first_name', 'last_name', 'number_id')
     form = CustomUserChangeForm
     add_form = CustomUserCreationForm
 
@@ -21,20 +23,14 @@ class CustomUserAdmin(UserAdmin):
         return ', '.join(groups)
     group.short_description = 'Grupos'
 
-    list_display = ['username', 'email', 'first_name', 'last_name', 'is_active', 'is_staff', 'group']
-    list_filter = ['username', 'groups']
+    list_display = ['email', 'first_name', 'last_name', 'is_active', 'is_staff', 'group']
+    list_filter = ['email', 'groups']
 
     fieldsets = (
         (
             'Información básica', {
                 'classes': ('wide',),
-                'fields': ('username', 'password'),
-            }
-        ),
-        (
-            'Información personal', {
-                'classes': ('wide',),
-                'fields': ('first_name', 'last_name', 'email'),
+                'fields': ('email', 'first_name', 'last_name'),
             }
         ),
         (
@@ -60,6 +56,5 @@ class CustomUserAdmin(UserAdmin):
             }
         ),
     ) + UserAdmin.add_fieldsets
-
 
 admin.site.register(CustomUser, CustomUserAdmin)
