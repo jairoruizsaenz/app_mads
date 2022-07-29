@@ -9,6 +9,10 @@
 
     <div class="row">
         <div class="col-md-8">
+            <p>
+                <a class="btn btn-warning btn-sm" title="Descargar Ficha" href="{% url 'baseApp:editar_solicitud' solicitud.pk %}">Editar Solicitud <i class="fas fa-download"></i></a>
+                <a class="btn btn-danger btn-sm" title="Descargar Ficha" href="{% url 'baseApp:borrar_solicitud' solicitud.pk %}">Borrar Solicitud <i class="fas fa-download"></i></a>
+            </p>
             <p><strong>Expediente ID:</strong> <br> {{ solicitud.expediente_unico }}</p>
             <p><strong>Título:</strong> <br> {{ solicitud.titulo }}</p>
             <p><strong>Año:</strong> <br> {{ solicitud.anho }}</p>
@@ -21,7 +25,7 @@
             <p><strong>Número de radicado:</strong> <br> {{ solicitud.num_radicado }}</p>
             <p><strong>Fecha de radicado:</strong> <br> {{ solicitud.fecha_radicado }}</p>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4" style=" border-left: 1px solid #c2c3c4;">
             <p><strong>Nombre del proyecto:</strong> <br> {{ solicitud.nombre_proyecto }}</p>
             <p><strong>Solicitante:</strong> <br> {{ solicitud.solicitante }}</p>
             <p><strong>Tipo de sustraccion:</strong> <br> {{ solicitud.tipo_sustraccion }}</p>
@@ -31,7 +35,7 @@
             <p><strong>Departamento:</strong> <br> {{ solicitud.departamento }}</p>
             <p><strong>Municipio:</strong> <br> {{ solicitud.municipio }}</p>
             <p><strong>Fecha de registro:</strong> <br> {{ solicitud.created_at }}</p>
-            <p><a class="btn btn-primary btn-sm" title="Descargar Ficha" href="{% url 'baseApp:generate_PDF_document' solicitud.pk %}">Descargar Ficha <i class="fas fa-download"></i></a></p>
+            <p><a class="btn btn-primary btn-sm" title="Descargar Ficha" href="{% url 'baseApp:generate_PDF_document' solicitud.pk %}">Descargar Ficha <i class="fas fa-download"></i></a></p>            
         </div>
     </div>
 {% endblock %}

@@ -1,8 +1,8 @@
-<!-- templates/solicitud_create.html -->
+<!-- templates/solicitud_update.html -->
 {% extends 'base.html' %}
 {% load static %}
-{% block referencia %}solicitud_create.html{% endblock %}
-{% block title_1 %}{% block title_2 %}Nueva solicitud{% endblock %}{% endblock %}
+{% block referencia %}solicitud_update.html{% endblock %}
+{% block title_1 %}{% block title_2 %}Actualización de solicitud{% endblock %}{% endblock %}
 
 {% block content %}
     <a class="boton" title="Regresar" href="{% url 'baseApp:solicitudes' %}"><i class="fas fa-chevron-left verde"></i> Regresar</a>
@@ -12,7 +12,7 @@
             <form action="" method="POST" id="solicitud_form">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <input type="submit" name="POST.Save" value="Guardar" class="btn btn-primary">
+                <input type="submit" name="POST.Save" value="Actualizar" class="btn btn-primary">
             </form>
         </div>
     </div>

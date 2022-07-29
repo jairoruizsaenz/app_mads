@@ -1,0 +1,16 @@
+<!-- templates/solicitud_update.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block referencia %}solicitud_update.html{% endblock %}
+{% block title_1 %}{% block title_2 %}Borrar solicitud{% endblock %}{% endblock %}
+
+{% block content %}
+	<form method="post">
+		{% csrf_token %}
+		<p>
+			¿Está seguro que desea borrar la solicitud <strong>{{ solicitud.titulo }}</strong>?
+		</p>
+		<input type="submit" value="Borrar" class="btn btn-danger">
+		<a title="Cancelar" href="{% url 'baseApp:detalles_solicitud' solicitud.pk %}" class="btn btn-success">Cancelar</a>
+	</form>
+{% endblock %}
