@@ -67,3 +67,12 @@ def generate_PDF_document(request, solicitud_pk):
         response['Content-Disposition'] = content
         return response
     return HttpResponse('Error: Not found')
+
+
+# TODO:
+
+# restricción de acceso a solicitudes no propias
+# transferencia de "propiedad" de solicitudes
+# configurar variables de entornos
+# configurar correo SMTP
+# carga de documentos?
