@@ -24,7 +24,7 @@
 					<br>
 					<h4 style="text-align: center;">Creación de cuenta</h4><br>
 					<br>
-					{% include 'messages.html' %}
+					{% comment %} {% include 'messages.html' %} {% endcomment %}
 					<form class="site-form" action="{% url 'accounts_app:signup' %}" method="post" autocomplete="off" style="padding-left: 5%; padding-right: 5%">
 						{% csrf_token %}
 						

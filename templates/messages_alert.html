@@ -1,0 +1,14 @@
+<!--
+    messages.debug(request, '%s SQL statements were executed.' % count)
+    messages.info(request, 'Three credits remain in your account.')
+    messages.success(request, 'Profile details updated.')
+    messages.warning(request, 'Your account expires in three days.')
+    messages.error(request, 'Document deleted.')
+-->
+
+{% for message in messages %}
+    <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert" style="text-align: center;">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endfor %}

@@ -10,11 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
+import environ
 from pathlib import Path
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -23,9 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-j36x(4o#*@f6aujcr*g^^o1j*0760bxf)_47ok_&*$nx@_&09('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+env = environ.Env( DEBUG=(bool, False) )
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+DEBUG = env.bool('DEBUG', default=True)
 
 ALLOWED_HOSTS=["*"]
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # Application definition
 
@@ -74,10 +79,21 @@ WSGI_APPLICATION = 'MADS.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': env('DB_NAME', default='void'),
+        'HOST': env('DB_HOST', default='void'),
+        'USER': env('DB_USER', default='void'),
+        'PASSWORD': env('DB_PASS', default='void'),
+        'PORT': env.int('DB_PORT', default=5432)
     }
 }
 
@@ -128,18 +144,29 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
-# Used for debug, it saves the emails as files in the "sent_files" folder
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+# :: Email settings :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+SMTP_SERVER = env.bool('SMTP_SERVER', default=False)
+if SMTP_SERVER:
+    # Gmail SMTP server
+    EMAIL_BACKEND = env('EMAIL_BACKEND', default='void')
+    EMAIL_HOST = env('EMAIL_HOST', default='void')
+    EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default='False')
+    EMAIL_PORT = env.int('EMAIL_PORT', default='999')
+    EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='void')
+    EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='void')
+    DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='void')
+else:
+    EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+    EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 
-'''
-# Gmail SMTP server
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-#EMAIL_USE_SSL = True
-#EMAIL_PORT = 465
-EMAIL_HOST_USER = 'your_account@gmail.com'
-EMAIL_HOST_PASSWORD = 'your_accounts password'
-'''
+# :: Messages settings ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+ERROR_MESSAGE = 'Se presentó un error inesperado, por favor informar al administrador'
+PERMISSION_MESSAGE = 'Ups! al parecer no tienes los permisos requeridos para acceder a esta sección'
+REQUIRED_LOGIN_MESSAGE = 'Debes iniciar sesión para acceder a esta sección'
+
+MESSAGE_TAGS = {
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}

@@ -13,6 +13,7 @@
                 <a class="btn btn-warning btn-sm" title="Descargar Ficha" href="{% url 'baseApp:editar_solicitud' solicitud.pk %}">Editar Solicitud <i class="fas fa-download"></i></a>
                 <a class="btn btn-danger btn-sm" title="Descargar Ficha" href="{% url 'baseApp:borrar_solicitud' solicitud.pk %}">Borrar Solicitud <i class="fas fa-download"></i></a>
             </p>
+            <p><strong>Evaluador (MADS):</strong> <br> {{ solicitud.autor.full_name }}</p>
             <p><strong>Expediente ID:</strong> <br> {{ solicitud.expediente_unico }}</p>
             <p><strong>Título:</strong> <br> {{ solicitud.titulo }}</p>
             <p><strong>Año:</strong> <br> {{ solicitud.anho }}</p>

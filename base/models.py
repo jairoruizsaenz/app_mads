@@ -1,6 +1,10 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 class Solicitud(models.Model):
+    autor = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name='Autor')
     expediente_unico = models.CharField(verbose_name='Expediente ID', max_length=200, null=False, blank=False, unique=True)
     titulo = models.CharField(verbose_name='Título', max_length=200, null=False, blank=False)
     anho = models.IntegerField(verbose_name='Año', null=True, blank=True)

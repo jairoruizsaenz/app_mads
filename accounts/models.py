@@ -55,6 +55,9 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = []
     objects = UserManager()
 
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
+
     def custom_method(self):
         validation = False
         if "h" in self.first_name:
