@@ -71,7 +71,7 @@ def signup_with_email_authentication_view(request):
             user.is_active = False
             user.save()
             current_site = get_current_site(request)
-            mail_subject = 'Activación de cuenta web FPS'
+            mail_subject = 'Activación de cuenta'
             message = render_to_string('accounts/acc_active_email.html', {
                 'user': user,
                 'domain': current_site.domain,
