@@ -26,6 +26,7 @@ class Solicitud(models.Model):
     sector = models.CharField(verbose_name='Sector', max_length=200, blank=False, choices=sector_choices, default='Infraestructura vial')
 
     num_radicado = models.IntegerField(verbose_name='Número de radicado', null=True, blank=True)
+    num_radicado_2 = models.CharField(verbose_name='Número de radicado 2', null=True, blank=True, max_length=30)
     fecha_radicado = models.DateField(verbose_name='Fecha de radicado')
     solicitante = models.CharField(verbose_name='Solicitante', max_length=200, null=False, blank=False)
     nombre_proyecto = models.TextField(verbose_name='Nombre del proyecto', null=True, blank=True)    

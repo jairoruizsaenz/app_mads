@@ -7,7 +7,7 @@ class SolicitudCreateForm(ModelForm):
     class Meta:
         model = Solicitud
         # fields = '__all__'
-        fields = ['expediente_unico', 'titulo', 'anho', 'descripcion', 'expediente', 'estado', 'etapa', 'actuacion', 'sector', 'num_radicado', 'fecha_radicado', 'solicitante', 'nombre_proyecto', 'tipo_sustraccion', 'hectareas_solicitadas', 'normatividad', 'reserva_forestal', 'departamento', 'municipio']
+        fields = ['expediente_unico', 'titulo', 'anho', 'descripcion', 'expediente', 'estado', 'etapa', 'actuacion', 'sector', 'num_radicado_2', 'fecha_radicado', 'solicitante', 'nombre_proyecto', 'tipo_sustraccion', 'hectareas_solicitadas', 'normatividad', 'reserva_forestal', 'departamento', 'municipio']
     
     def __init__(self, *args, **kwargs):
         super(SolicitudCreateForm, self).__init__(*args, **kwargs)
@@ -20,7 +20,7 @@ class SolicitudCreateForm(ModelForm):
         self.fields['etapa'].widget.attrs.update({'class': 'form-select form-select-sm'})
         self.fields['actuacion'].widget.attrs.update({'class': 'form-select form-select-sm'})
         self.fields['sector'].widget.attrs.update({'class': 'form-select form-select-sm'})
-        self.fields['num_radicado'].widget.attrs.update({'class': 'form-control form-control-sm'})
+        self.fields['num_radicado_2'].widget.attrs.update({'class': 'form-control form-control-sm'})
         self.fields['fecha_radicado'].widget.attrs.update({'class': 'form-control form-control-sm'})
         self.fields['solicitante'].widget.attrs.update({'class': 'form-control form-control-sm'})
         self.fields['nombre_proyecto'].widget.attrs.update({'class': 'form-control form-control-sm'})
@@ -39,7 +39,7 @@ class SolicitudUpdateForm(ModelForm):
     class Meta:
         model = Solicitud
         # fields = '__all__'
-        fields = ['expediente_unico', 'titulo', 'anho', 'descripcion', 'expediente', 'estado', 'etapa', 'actuacion', 'sector', 'num_radicado', 'fecha_radicado', 'solicitante', 'nombre_proyecto', 'tipo_sustraccion', 'hectareas_solicitadas', 'normatividad', 'reserva_forestal', 'departamento', 'municipio']
+        fields = ['expediente_unico', 'titulo', 'anho', 'descripcion', 'expediente', 'estado', 'etapa', 'actuacion', 'sector', 'num_radicado_2', 'fecha_radicado', 'solicitante', 'nombre_proyecto', 'tipo_sustraccion', 'hectareas_solicitadas', 'normatividad', 'reserva_forestal', 'departamento', 'municipio']
     
     def __init__(self, *args, **kwargs):
         super(SolicitudUpdateForm, self).__init__(*args, **kwargs)
@@ -52,7 +52,7 @@ class SolicitudUpdateForm(ModelForm):
         self.fields['etapa'].widget.attrs.update({'class': 'form-select form-select-sm'})
         self.fields['actuacion'].widget.attrs.update({'class': 'form-select form-select-sm'})
         self.fields['sector'].widget.attrs.update({'class': 'form-select form-select-sm'})
-        self.fields['num_radicado'].widget.attrs.update({'class': 'form-control form-control-sm'})
+        self.fields['num_radicado_2'].widget.attrs.update({'class': 'form-control form-control-sm'})
         self.fields['fecha_radicado'].widget.attrs.update({'class': 'form-control form-control-sm'})
         self.fields['solicitante'].widget.attrs.update({'class': 'form-control form-control-sm'})
         self.fields['nombre_proyecto'].widget.attrs.update({'class': 'form-control form-control-sm'})

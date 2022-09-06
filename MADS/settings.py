@@ -35,6 +35,7 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 # Application definition
 
 INSTALLED_APPS = [
+    'import_export',
     'base.apps.BaseConfig',
     'accounts.apps.AccountsConfig',
     'django.contrib.admin',
