@@ -1,6 +1,6 @@
 # Herramienta de evaluación de solicitudes de sustracciones
 
-![screenshot](https://raw.githubusercontent.com/jairoruizsaenz/app_mads/main/MADS/static/images/front.png "Herramienta de evaluación de solicitudes de sustracciones")
+![screenshot](https://raw.githubusercontent.com/jairoruizsaenz/app_mads/main/static/images/front.png "Herramienta de evaluación de solicitudes de sustracciones")
 
 ## Descripción
 
