@@ -26,11 +26,13 @@ class UserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', False)
         extra_fields.setdefault('is_superuser', False)
+        extra_fields.setdefault('is_active_by_admin', False)
         return self._create_user(email, password, **extra_fields)
 
     def create_superuser(self, email, password, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('is_active_by_admin', True)
 
         if extra_fields.get('is_staff') is not True:
             raise ValueError('Superuser must have is_staff=True.')
@@ -49,7 +51,7 @@ class CustomUser(AbstractUser):
 
     first_name = models.CharField(verbose_name='Nombre', blank=False, help_text='Nombre - helptext', max_length=200)
     last_name = models.CharField(verbose_name='Apellido', blank=False, help_text='Apellido - helptext', max_length=200)
-    # is_active = models.BooleanField(default=False)
+    is_active_by_admin = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

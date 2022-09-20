@@ -15,7 +15,7 @@
     </div>    
 	<hr>
 	{% comment %} <div class="row row-cols-12 row-cols-md-12 g-12"> {% endcomment %}
-	{% for solicitud in solicitudes %}
+	{% for solicitud in items %}
 		<div class="row">
 			<div class="col">
 				<a href="{% url 'baseApp:detalles_solicitud' solicitud.pk %}" class="card h-100">
@@ -37,4 +37,5 @@
 		</div>
 		<br>
 	{% endfor %}
+	{% include 'pagination.html' %}
 {% endblock %}

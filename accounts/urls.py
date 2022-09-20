@@ -4,9 +4,9 @@ from django.conf.urls import url
 
 app_name = 'accounts_app'
 urlpatterns = [
-    # path('login/', views.login_view, name='login'),
+    path('login/', views.login_view, name='login'),
     path('signup/', views.signup_with_email_authentication_view, name='signup'),
-    path('signup_without_authentication/', views.signup_without_email_authentication_view, name='signup2'),
+    # path('signup_without_authentication/', views.signup_without_email_authentication_view, name='signup2'),
     path('registration_email/', views.registration_email_view, name='registration_email'),
     path('account_activation_done/', views.account_activation_done_view, name='account_activation_done'),
     path('account_activation_failed/', views.account_activation_failed_view, name='account_activation_failed'),

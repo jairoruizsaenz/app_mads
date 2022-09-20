@@ -23,7 +23,7 @@ class CustomUserAdmin(UserAdmin):
         return ', '.join(groups)
     group.short_description = 'Grupos'
 
-    list_display = ['email', 'first_name', 'last_name', 'is_active', 'is_staff', 'group']
+    list_display = ['email', 'first_name', 'last_name', 'is_active', 'is_staff', 'is_active_by_admin', 'group']
     list_filter = ['email', 'groups']
 
     fieldsets = (
@@ -36,7 +36,7 @@ class CustomUserAdmin(UserAdmin):
         (
             'Permisos', {
                 'classes': ('collapse',),
-                'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions'),
+                'fields': ('is_active', 'is_staff', 'is_superuser', 'is_active_by_admin', 'groups', 'user_permissions'),
             }
         ),
         (

@@ -1,16 +1,28 @@
 from django.shortcuts import render, redirect
-# from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
+from .forms import CustomUserCreationForm
+from django.core.mail import send_mail
+from django.conf import settings
+from django.http import HttpResponse
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.template.loader import render_to_string
+from .tokens import account_activation_token
+from .models import CustomUser
+from django.core.mail import EmailMessage
+from django.contrib import messages
+
+# from django.shortcuts import render, redirect
+# from django.contrib.auth import login
+# from django.contrib.auth import authenticate
+# from .forms import SignupForm
+# from django.contrib.auth.models import User
+# from django.contrib.auth.forms import UserCreationForm
 # from django.contrib.auth import logout
 # from django.urls import reverse_lazy
 # from django.views import generic
-
-from .forms import CustomUserCreationForm
-
-from django.core.mail import send_mail
-from django.conf import settings
-
 
 def email(request):
     # function to send emails
@@ -47,20 +59,6 @@ def signup_without_email_authentication_view(request):
     else:
         form = CustomUserCreationForm()
     return render(request, 'accounts/signup2.html', {'form': form})
-
-from django.http import HttpResponse
-# from django.shortcuts import render, redirect
-# from django.contrib.auth import login
-# from django.contrib.auth import authenticate
-# from .forms import SignupForm
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes, force_text
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.template.loader import render_to_string
-from .tokens import account_activation_token
-# from django.contrib.auth.models import User
-from .models import CustomUser
-from django.core.mail import EmailMessage
 
 
 def signup_with_email_authentication_view(request):
@@ -108,21 +106,24 @@ def activate_user_account_view(request, uidb64, token):
         return redirect('accounts_app:account_activation_failed')
         # return HttpResponse('Activation link is invalid!')
 
-'''
+
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
             # log in the user
             user = form.get_user()
-            login(request, user)
-            if 'next' in request.POST:
-                return redirect(request.POST.get('next'))
-            return redirect('persuasivo_app:index')
+            if user.is_active_by_admin:
+                login(request, user)
+                if 'next' in request.POST:
+                    return redirect(request.POST.get('next'))
+                return redirect('baseApp:solicitudes')
+            else:
+                messages.error(request, settings.ACTIVATION_REQUIRED)
+                return redirect(settings.LOGIN_URL)
     else:
         form = AuthenticationForm()
-    return render(request, 'accounts/login.html', {'form': form})
-'''
+    return render(request, 'registration/login.html', {'form': form})
 
 
 '''

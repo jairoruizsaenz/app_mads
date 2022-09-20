@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Solicitud
 from .forms import SolicitudCreateForm, SolicitudUpdateForm
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .utils import *
 import datetime
 # from django.contrib.auth.decorators import login_required
@@ -9,9 +10,45 @@ from .decorators import user_is_solicitud_author, login_required
 
 @login_required
 def ListSolicitudes(request):
-    solicitudes = Solicitud.objects.all().order_by('-created_at')
-    context = { 'solicitudes':solicitudes}
+    
+    solicitudes = Solicitud.objects.filter(visibilidad='visible').order_by('-created_at')
+    
+    items_por_hoja = 5
+    margen_items = 2
+    paginator = Paginator(solicitudes, items_por_hoja)
+    page = request.GET.get('page')
+
+    try:
+        items = paginator.page(page)
+    except PageNotAnInteger:
+        items = paginator.page(1)
+    except EmptyPage:
+        items = paginator.page(paginator.num_pages)
+
+    index = items.number - 1
+    max_index = len(paginator.page_range)
+
+    if index <= margen_items:
+        start_index = 0
+        end_index = (margen_items * 2) + 1
+    elif index >= max_index - margen_items - 1:
+        start_index = max_index - ((margen_items * 2) + 1)
+        end_index = max_index
+    else:
+        start_index = index - margen_items
+        end_index = index + margen_items + 1
+
+    page_range = paginator.page_range[start_index:end_index]
+    last_item = (len(solicitudes) // items_por_hoja) if (len(solicitudes) % items_por_hoja) == 0 else (len(solicitudes) // items_por_hoja) + 1
+    
+    context = {
+        'solicitudes':solicitudes,
+        'items': items,
+        'page_range': page_range,
+        'last_item': last_item,
+    }
     return render(request, 'base/solicitud_list.html', context)
+
 
 @login_required
 def CreateSolicitud(request):
@@ -57,7 +94,9 @@ def UpdateSolicitud(request, solicitud_pk):
 def DeleteSolicitud(request, solicitud_pk):
     solicitud = get_object_or_404(Solicitud, pk=solicitud_pk)
     if request.method == 'POST':
-        solicitud.delete()
+        # solicitud.delete()
+        solicitud.visibilidad = 'oculto'
+        solicitud.save()
         return redirect('baseApp:solicitudes')
 
     context = {'solicitud': solicitud}

@@ -163,6 +163,7 @@ else:
 # :: Messages settings ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ERROR_MESSAGE = 'Se presentó un error inesperado, por favor informar al administrador'
 PERMISSION_MESSAGE = 'Ups! al parecer no tienes los permisos requeridos para acceder a esta sección'
+ACTIVATION_REQUIRED = 'Su cuenta de correo no ha sido activada aún, debe contactarse con el administrador del sistemas'
 REQUIRED_LOGIN_MESSAGE = 'Debes iniciar sesión para acceder a esta sección'
 
 MESSAGE_TAGS = {
