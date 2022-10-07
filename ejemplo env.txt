@@ -1,0 +1,21 @@
+# https://solicitudes-mads.herokuapp.com/
+
+# CONFIG
+DEBUG=True
+
+# DB dev
+DB_NAME='d91pmg7lo3fj1m'
+DB_HOST='ec2-3-225-110-188.compute-1.amazonaws.com'
+DB_USER='sjkmdecbhtctzc'
+DB_PASS='9e5478382fbaa4b4c66dd192a2480d35dfb59348598ff11f730a1cf662da66ff'
+DB_PORT='5432'
+
+# EMAIL SMTP
+SMTP_SERVER = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'jairoruizsaenz.developer@gmail.com'
+EMAIL_HOST_PASSWORD = 'gtfawzdsrsjkkeyl'
+DEFAULT_FROM_EMAIL = 'jairoruizsaenz.developer@gmail.com'
